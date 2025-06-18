@@ -880,6 +880,8 @@
 import 'package:flutter/material.dart';
 
 class CalculatorApp extends StatelessWidget {
+  const CalculatorApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -894,11 +896,13 @@ class CalculatorApp extends StatelessWidget {
 }
 
 class CalculatorHome extends StatefulWidget {
+  const CalculatorHome({super.key});
+
   @override
-  _CalculatorHomeState createState() => _CalculatorHomeState();
+  CalculatorHomeState createState() => CalculatorHomeState();
 }
 
-class _CalculatorHomeState extends State<CalculatorHome> {
+class CalculatorHomeState extends State<CalculatorHome> {
   String _display = "0"; // To show the full expression
   String _currentInput = "0";
   double _firstOperand = 0;
@@ -975,7 +979,12 @@ class _CalculatorHomeState extends State<CalculatorHome> {
       }
 
       // Format the result to show only six digits after the decimal point
-      _display = result.toStringAsFixed(3);
+      if (result % 1 == 0) {
+        _display = result.toStringAsFixed(0); // No decimal if whole number
+      } else {
+        _display = result.toStringAsFixed(1); // Up to 3 decimals if needed
+      }
+      // _display = result.toStringAsFixed(3);
       _currentInput = _display; // Update current input to the formatted result
       _operator = "";
       _operatorPressed = false;
@@ -988,8 +997,11 @@ class _CalculatorHomeState extends State<CalculatorHome> {
       double percentage = value / 100; // Divide by 100
 
       // Update display to show the decimal value (e.g., ".78")
-      _display = percentage.toStringAsFixed(
-          3); // Display the result formatted to 6 decimal places
+      if (percentage % 1 == 0) {
+        _display = percentage.toStringAsFixed(0); // No decimal if whole number
+      } else {
+        _display = percentage.toStringAsFixed(1); // Up to 3 decimals if needed
+      }
       _currentInput =
           percentage.toString(); // Update current input to the decimal result
     }
@@ -1025,7 +1037,7 @@ class _CalculatorHomeState extends State<CalculatorHome> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(5.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
@@ -1033,7 +1045,7 @@ class _CalculatorHomeState extends State<CalculatorHome> {
               alignment: Alignment.centerRight,
               child: Text(
                 _display,
-                style: TextStyle(fontSize: 48.0, color: Colors.white),
+                style: TextStyle(fontSize: 40, color: Colors.white),
               ),
             ),
             SizedBox(height: 20),

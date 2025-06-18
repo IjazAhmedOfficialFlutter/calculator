@@ -1,0 +1,2 @@
+/Users/ijazahmed/StudioProjects/calculator/android/app/.cxx/RelWithDebInfo/426a2972/x86/CMakeFiles/edit_cache.dir
+/Users/ijazahmed/StudioProjects/calculator/android/app/.cxx/RelWithDebInfo/426a2972/x86/CMakeFiles/rebuild_cache.dir
